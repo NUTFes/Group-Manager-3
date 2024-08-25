@@ -1,0 +1,12 @@
+tunnel: 3b69eefa-5aea-49a2-827b-7e705695c241
+credentials-file: /home/nonroot/.cloudflared/3b69eefa-5aea-49a2-827b-7e705695c241.json
+protocol: http2
+
+ingress:
+  - hostname: group-manager.nutfes.net
+    service: http://user_front:3000
+  - hostname: group-manager-admin.nutfes.net
+    service: http://admin_view:8000
+  - hostname: group-manager-api.nutfes.net
+    service: http://api:3000
+  - service: http_status:404
