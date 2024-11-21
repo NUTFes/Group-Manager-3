@@ -50,7 +50,7 @@ services:
     build: ./user
     container_name: 'GM3-USER'
     ports:
-      - "8080:3000"
+      - "8001:8001"
     command: npm run dev
     volumes: [./user:/app]
     depends_on: [api]
