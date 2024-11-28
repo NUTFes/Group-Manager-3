@@ -52,7 +52,8 @@ build-gm3-mac:
 	docker compose run --rm api rails db:create
 	docker compose run --rm api rails db:migrate
 	docker compose run --rm api rails db:seed_fu FIXTURE_PATH=db/fixtures/develop
-build db:
+
+build-db:
 	docker compose run --rm api rails db:create
 	docker compose run --rm api rails db:migrate
 	docker compose run --rm api rails db:seed_fu FIXTURE_PATH=db/fixtures/develop
