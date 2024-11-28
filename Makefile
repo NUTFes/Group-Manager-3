@@ -1,6 +1,18 @@
 api=https://group-manager-api.nutfes.net
 
+d:
+	docker compose down
+
 build:
+	docker compose build
+	docker compose run --rm user_front npm install
+	docker compose run --rm admin_view npm install
+	docker compose run --rm user npm install
+	docker compose run --rm api rails db:create
+	docker compose run --rm api rails db:migrate
+	docker compose run --rm api rails db:seed_fu FIXTURE_PATH=db/fixtures/develop
+
+build-gm2:
 	docker compose build
 	docker compose run --rm user_front npm install
 	docker compose run --rm admin_view npm install
@@ -8,7 +20,24 @@ build:
 	docker compose run --rm api rails db:migrate
 	docker compose run --rm api rails db:seed_fu FIXTURE_PATH=db/fixtures/develop
 
-build mac:
+build-gm3:
+	docker compose build
+	docker compose run --rm admin_view npm install
+	docker compose run --rm user npm install
+	docker compose run --rm api rails db:create
+	docker compose run --rm api rails db:migrate
+	docker compose run --rm api rails db:seed_fu FIXTURE_PATH=db/fixtures/develop
+
+build-mac:
+	PLATFORM=arm64-darwin docker compose build
+	docker compose run --rm user_front npm install
+	docker compose run --rm admin_view npm install
+	docker compose run --rm user npm install
+	docker compose run --rm api rails db:create
+	docker compose run --rm api rails db:migrate
+	docker compose run --rm api rails db:seed_fu FIXTURE_PATH=db/fixtures/develop
+
+build-gm2-mac:
 	PLATFORM=arm64-darwin docker compose build
 	docker compose run --rm user_front npm install
 	docker compose run --rm admin_view npm install
@@ -16,7 +45,15 @@ build mac:
 	docker compose run --rm api rails db:migrate
 	docker compose run --rm api rails db:seed_fu FIXTURE_PATH=db/fixtures/develop
 
-build db:
+build-gm3-mac:
+	PLATFORM=arm64-darwin docker compose buildS
+	docker compose run --rm admin_view npm install
+	docker compose run --rm user npm install
+	docker compose run --rm api rails db:create
+	docker compose run --rm api rails db:migrate
+	docker compose run --rm api rails db:seed_fu FIXTURE_PATH=db/fixtures/develop
+
+build-db:
 	docker compose run --rm api rails db:create
 	docker compose run --rm api rails db:migrate
 	docker compose run --rm api rails db:seed_fu FIXTURE_PATH=db/fixtures/develop
